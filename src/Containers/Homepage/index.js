@@ -59,7 +59,13 @@ export default function Homepage() {
 
   return (
     <>
-      <Grid container spacing={3} justifyContent="left" marginBottom={2}>
+      <Grid
+        container
+        spacing={3}
+        justifyContent="left"
+        marginBottom={2}
+        marginTop={2}
+      >
         <Grid item>
           <Typography
             onClick={() => {

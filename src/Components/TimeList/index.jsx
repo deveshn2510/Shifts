@@ -47,11 +47,17 @@ export default function TimeList(props) {
                   className={classes.heading}
                 >
                   {getDateLabel(el?.timings[0]?.startTime, el.dateLabel)}{" "}
-                  <span
-                    style={{ color: "#CBD2E1", fontSize: 12, fontWeight: 400 }}
-                  >
-                    {type === "myShifts" && el?.timings?.length} shifts
-                  </span>
+                  {type === "myShifts" && (
+                    <span
+                      style={{
+                        color: "#CBD2E1",
+                        fontSize: 12,
+                        fontWeight: 400,
+                      }}
+                    >
+                      {el?.timings?.length} shifts
+                    </span>
+                  )}
                 </Typography>
               </Grid>
               <Grid item>
@@ -65,10 +71,28 @@ export default function TimeList(props) {
                         sx={{ border: "0.5px solid #CBD2E1" }}
                       >
                         <Grid item>
-                          <Typography color={"#4F6C92"} pt={1} pb={1} ml={1}>
-                            {moment(timing.startTime).format("HH:mm")} -{" "}
-                            {moment(timing.endTime).format("HH:mm")}
-                          </Typography>
+                          <>
+                            <Grid container direction="column">
+                              <Grid item>
+                                <Typography color={"#4F6C92"} pt={1} ml={1}>
+                                  {moment(timing.startTime).format("HH:mm")} -{" "}
+                                  {moment(timing.endTime).format("HH:mm")}
+                                </Typography>
+                              </Grid>
+                              {type === "myShifts" && (
+                                <Grid item textAlign={"left"}>
+                                  <Typography
+                                    color={"#CBD2E1"}
+                                    fontSize={12}
+                                    pb={1}
+                                    ml={1}
+                                  >
+                                    {timing.area}
+                                  </Typography>
+                                </Grid>
+                              )}
+                            </Grid>
+                          </>
                         </Grid>
                         <Grid item pt={1} pb={1} mr={1}>
                           <div>
@@ -83,6 +107,10 @@ export default function TimeList(props) {
                                 onClick={() => {
                                   handleCancel(timing.id);
                                 }}
+                                disabled={moment().isBetween(
+                                  timing.startTime,
+                                  timing.endTime
+                                )}
                               >
                                 Cancel
                               </Button>

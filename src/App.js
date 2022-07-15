@@ -1,23 +1,16 @@
-import logo from './logo.svg';
-import './App.css';
+import { Box } from "@mui/system";
+import "./App.css";
+import Homepage from "./Containers/Homepage";
+import { ShiftContextProvider } from "./Context/shifts";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <ShiftContextProvider>
+        <Box width={"30%"} margin="0 auto">
+          <Homepage />
+        </Box>
+      </ShiftContextProvider>
     </div>
   );
 }
